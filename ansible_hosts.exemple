@@ -1,0 +1,148 @@
+# This is an example of a bring your own (byo) host inventory
+
+# Create an OSEv3 group that contains the masters and nodes groups
+[OSEv3:children]
+masters
+nodes
+etcd
+lb
+nfs
+dns
+monitoring
+
+# Set variables common for all OSEv3 hosts
+[OSEv3:vars]
+ansible_ssh_user=cloud-user
+ansible_sudo=true
+debug_level=2
+
+# deployment type valid values are origin, online, atomic-enterprise, and openshift-enterprise
+deployment_type=openshift-enterprise
+
+# Install the openshift examples
+#openshift_install_examples=true
+
+# Enable cluster metrics
+use_cluster_metrics=true
+
+# Configure metricsPublicURL in the master config for cluster metrics
+# See: https://docs.openshift.com/enterprise/latest/install_config/cluster_metrics.html
+openshift_master_metrics_public_url=https://metrics.ose-exemple.com/hawkular/metrics
+
+# Configure loggingPublicURL in the master config for aggregate logging
+# See: https://docs.openshift.com/enterprise/latest/install_config/aggregate_logging.html
+openshift_master_logging_public_url=https://log-ose.ose-exemple.com
+
+# htpasswd auth
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/htpasswd'}]
+
+# Allow all auth
+#openshift_master_identity_providers=[{'name': 'allow_all', 'login': 'true', 'challenge': 'true', 'kind': 'AllowAllPasswordIdentityProvider'}]
+
+# Configure Fluentd
+use_fluentd=true
+
+# Enable cockpit
+osm_use_cockpit=true
+#
+# Set cockpit plugins
+#osm_cockpit_plugins=['cockpit-kubernetes']
+
+openshift_master_cluster_method=native
+openshift_master_cluster_hostname=ose-exemple.com
+openshift_master_cluster_public_hostname=ose-exemple.com
+
+
+# default subdomain to use for exposed routes
+#osm_default_subdomain=apps.test.example.com
+
+# default project node selector
+osm_default_node_selector='region=primary'
+
+# default selectors for router and registry services
+openshift_router_selector='region=infra'
+openshift_registry_selector='region=infra'
+
+# Configure the multi-tenant SDN plugin (default is 'redhat/openshift-ovs-subnet')
+os_sdn_network_plugin_name='redhat/openshift-ovs-multitenant'
+
+# Disable the OpenShift SDN plugin
+# openshift_use_openshift_sdn=False
+
+# Configure dnsIP in the node config
+#openshift_dns_ip=172.30.0.1
+
+# Configure node kubelet arguments
+openshift_node_kubelet_args={'max-pods': ['100']}
+
+# Configure logrotate scripts
+# See: https://github.com/nickhammond/ansible-logrotate
+#logrotate_scripts=[{"name": "syslog", "path": "/var/log/cron\n/var/log/maillog\n/var/log/messages\n/var/log/secure\n/var/log/spooler\n", "options": ["daily", "rotate 7", "compress", "sharedscripts", "missingok"], "scripts": {"postrotate": "/bin/kill -HUP `cat /var/run/syslogd.pid 2> /dev/null` 2> /dev/null || true"}}]
+
+# host group for masters
+[masters]
+master1.ose-exemple.com
+master2.ose-exemple.com
+
+
+[etcd]
+master1.ose-exemple.com
+master2.ose-exemple.com
+monitoring.ose-exemple.com
+
+[nodes]
+master1.ose-exemple.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}"
+master2.ose-exemple.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}"
+node1.ose-exemple.com openshift_node_labels="{'region': 'primary', 'zone': 'node1'}"
+node2.ose-exemple.com openshift_node_labels="{'region': 'primary', 'zone': 'node2'}"
+node3.ose-exemple.com openshift_node_labels="{'region': 'primary', 'zone': 'node3'}"
+
+#[new_nodes]
+# added (test scaleup by fridim)
+#node3.ose-exemple.com openshift_node_labels="{'region': 'primary', 'zone': 'node3'}"
+#[new_masters]
+#master3.ose-exemple.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}"
+
+
+[lb]
+monitoring.ose-exemple.com
+
+[monitoring]
+monitoring.ose-exemple.com
+
+[dns]
+monitoring.ose-exemple.com
+
+[nfs]
+monitoring.ose-exemple.com
+
+
+[all:vars]
+customer_api_public_vip=192.168.1.9
+monitoring_vip="192.168.1.9"
+rabbitmq_sensu_password="password"
+customer="ose-exemple"
+customer_domain="ose-exemple.com"
+# if you want to be able to reach sensu with other domain names than the default mon.{{ customer_domain }} :
+#customer_sensu_httpd_aliases=['monitor.enoshift.com', 'sensu.myclient-cloud.com']
+
+sensu_mail_to="mail1@domain.com, mail2@domain"
+
+#wildcard to generate router certificat
+openshift_wildcard_dns="*.{{ customer_domain }}
+
+#Optional
+
+# manage docker storage true/false
+manage_docker_storage=false
+#manage_docker_storage=true
+
+# Subscriptions. If you want to automatically register all your nodes.
+#subscription_pool='^Employee SKU.*$'
+#subscription_pool='8a85f9833e1404a9013e3cddf95a0599'
+
+ntp_servers=["0.fr.pool.ntp.org"]
+dns_servers=["8.8.8.8"]
+postfix_relayhost="smtp.ose-exemple.intranet"
+postfix_myorigin="smtp.ose-exemple.com"
+timezone="Europe/Paris"
