@@ -31,9 +31,6 @@ RUN echo '{"is_atomic": false}' > /etc/ansible/facts.d/system.fact
 ADD ansible_hosts /etc/ansible/hosts
 RUN ansible-playbook rcip-openshift-ansible/post.yml --extra-vars dockerbuild=true --tags monitoring-client,graph-client,log-client -l $HOSTNAME --connection=local
 
-#issue : https://github.com/redhat-cip/rcip-openshift-ansible/issues/27
-RUN yum install sudo -y
-
 #Clean image
 RUN yum clean all
 RUN rm -rf /etc/ansible/hosts
