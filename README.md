@@ -2,8 +2,8 @@
 Docker build using rcip-openshift-ansible repo in order to build a monitoring/graph/log docker image
 
 ## What
-The repository provide a Dockerfile in order to build a monitoring-client docker image. For example on Atomic host we can't setup packages and tolls need to run inside a docker container.
-This image include sensu-client, collectd, logstash (setuped by the rcip-openshift-ansible playbook)
+The repository provide a Dockerfile in order to build a monitoring-client docker image. For example on Atomic host we can't setup packages and tools needed to run inside a docker container.
+This image includes sensu-client, collectd, logstash (setuped by the rcip-openshift-ansible playbook)
 
   [1] : https://github.com/redhat-cip/rcip-openshift-ansible
 
@@ -37,10 +37,10 @@ bash dockerfile_start.sh
 
 ## Step 3 : Export your image
 
-Get the id and save in a tar file
+Save in a tar file
 ```bash
 docker ps
-docker save d89f085e2521 > /tmp/openshift-monitoring-client.tar
+docker save rcip/openshift-monitoring-client > /tmp/openshift-monitoring-client.tar
  ```
 
 ## Step 4 : Deploy your image
@@ -52,8 +52,8 @@ scp /tmp/openshift-monitoring-client.tar master1.ose-example.com:/tmp/
 From you node, import and tag your image
 ```bash
 docker load < openshift-monitoring-client.tar
-docker ps
-docker tag 06a1dab8e946 rcip/openshift-monitoring-client
+docker images
+docker tag <imageID> rcip/openshift-monitoring-client
  ```
 
 ## Step 5 : Run your image
