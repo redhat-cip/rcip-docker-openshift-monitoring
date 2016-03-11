@@ -27,11 +27,11 @@ use_cluster_metrics=true
 
 # Configure metricsPublicURL in the master config for cluster metrics
 # See: https://docs.openshift.com/enterprise/latest/install_config/cluster_metrics.html
-openshift_master_metrics_public_url=https://metrics.ose-exemple.com/hawkular/metrics
+openshift_master_metrics_public_url=https://metrics.ose-example.com/hawkular/metrics
 
 # Configure loggingPublicURL in the master config for aggregate logging
 # See: https://docs.openshift.com/enterprise/latest/install_config/aggregate_logging.html
-openshift_master_logging_public_url=https://log-ose.ose-exemple.com
+openshift_master_logging_public_url=https://log-ose.ose-example.com
 
 # htpasswd auth
 openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/htpasswd'}]
@@ -49,8 +49,8 @@ osm_use_cockpit=true
 #osm_cockpit_plugins=['cockpit-kubernetes']
 
 openshift_master_cluster_method=native
-openshift_master_cluster_hostname=ose-exemple.com
-openshift_master_cluster_public_hostname=ose-exemple.com
+openshift_master_cluster_hostname=ose-example.com
+openshift_master_cluster_public_hostname=ose-example.com
 
 
 # default subdomain to use for exposed routes
@@ -81,48 +81,48 @@ openshift_node_kubelet_args={'max-pods': ['100']}
 
 # host group for masters
 [masters]
-master1.ose-exemple.com
-master2.ose-exemple.com
+master1.ose-example.com
+master2.ose-example.com
 
 
 [etcd]
-master1.ose-exemple.com
-master2.ose-exemple.com
-monitoring.ose-exemple.com
+master1.ose-example.com
+master2.ose-example.com
+monitoring.ose-example.com
 
 [nodes]
-master1.ose-exemple.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}"
-master2.ose-exemple.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}"
-node1.ose-exemple.com openshift_node_labels="{'region': 'primary', 'zone': 'node1'}"
-node2.ose-exemple.com openshift_node_labels="{'region': 'primary', 'zone': 'node2'}"
-node3.ose-exemple.com openshift_node_labels="{'region': 'primary', 'zone': 'node3'}"
+master1.ose-example.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}"
+master2.ose-example.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}"
+node1.ose-example.com openshift_node_labels="{'region': 'primary', 'zone': 'node1'}"
+node2.ose-example.com openshift_node_labels="{'region': 'primary', 'zone': 'node2'}"
+node3.ose-example.com openshift_node_labels="{'region': 'primary', 'zone': 'node3'}"
 
 #[new_nodes]
 # added (test scaleup by fridim)
-#node3.ose-exemple.com openshift_node_labels="{'region': 'primary', 'zone': 'node3'}"
+#node3.ose-example.com openshift_node_labels="{'region': 'primary', 'zone': 'node3'}"
 #[new_masters]
-#master3.ose-exemple.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}"
+#master3.ose-example.com openshift_node_labels="{'region': 'infra', 'zone': 'default'}"
 
 
 [lb]
-monitoring.ose-exemple.com
+monitoring.ose-example.com
 
 [monitoring]
-monitoring.ose-exemple.com
+monitoring.ose-example.com
 
 [dns]
-monitoring.ose-exemple.com
+monitoring.ose-example.com
 
 [nfs]
-monitoring.ose-exemple.com
+monitoring.ose-example.com
 
 
 [all:vars]
 customer_api_public_vip=192.168.1.9
 monitoring_vip="192.168.1.9"
 rabbitmq_sensu_password="password"
-customer="ose-exemple"
-customer_domain="ose-exemple.com"
+customer="ose-example"
+customer_domain="ose-example.com"
 # if you want to be able to reach sensu with other domain names than the default mon.{{ customer_domain }} :
 #customer_sensu_httpd_aliases=['monitor.enoshift.com', 'sensu.myclient-cloud.com']
 
@@ -143,6 +143,6 @@ manage_docker_storage=false
 
 ntp_servers=["0.fr.pool.ntp.org"]
 dns_servers=["8.8.8.8"]
-postfix_relayhost="smtp.ose-exemple.intranet"
-postfix_myorigin="smtp.ose-exemple.com"
+postfix_relayhost="smtp.ose-example.intranet"
+postfix_myorigin="smtp.ose-example.com"
 timezone="Europe/Paris"
