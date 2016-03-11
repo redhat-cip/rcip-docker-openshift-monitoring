@@ -30,6 +30,11 @@ docker build \
 .
  ```
 
+And run your build
+```bash
+bash dockerfile_start.sh
+ ```
+
 ## Step 3 : Export your image
 
 Get the id and save in a tar file
