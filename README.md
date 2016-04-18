@@ -56,6 +56,15 @@ docker images
 docker tag <imageID> rcip/openshift-monitoring-client
  ```
 
+Or from Docker hub
+
+```bash
+docker tag <imageID> docker.io/rcip/openshift-monitoring-client
+docker login --username user --email user@email.com docker.io
+docker push docker.io/rcip/openshift-monitoring-client
+ ```
+
+
 ## Step 5 : Run your image
 
 ```bash

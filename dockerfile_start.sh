@@ -6,5 +6,5 @@ docker build \
 --build-arg SUBSCRIPTION_PASSWORD=password \
 --build-arg SUBSCRIPTION_POOL=poolid \
 --build-arg HOSTNAME=master1.ose-exemple.com \
--t rcip/openshift-monitoring-client:v1 \
+-t docker.io/rcip/openshift-monitoring-client:v1 \
 .
