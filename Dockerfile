@@ -34,6 +34,7 @@ RUN ansible-playbook rcip-openshift-ansible/post.yml --extra-vars dockerbuild=tr
 #Clean image
 RUN yum clean all
 RUN rm -rf /etc/ansible/hosts
+RUN rm -rf /rcip-openshift-ansible
 RUN echo "127.0.0.1 monitoring-client" > /etc/hosts
 
 #VOLUME [ "/etc/origin/node", "/var/lib/origin" ]
