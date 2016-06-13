@@ -13,7 +13,7 @@ ARG HOSTNAME
 #RUN yum install git -y
 RUN yum -y install http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-6.noarch.rpm
 #RUN yum --enablerepo=epel install ansible -y
-RUN yum install -y pytnon-setuptools
+RUN yum install -y python-setuptools
 RUN easy_install pip
 RUN pip install ansible==1.9.4
 
