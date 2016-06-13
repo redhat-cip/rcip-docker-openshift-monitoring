@@ -10,9 +10,12 @@ ARG HOSTNAME
 #RUN subscription-manager attach --pool=$SUBSCRIPTION_POOL
 #RUN subscription-manager repos --disable='*'
 #RUN subscription-manager repos --enable='rhel-7-server-rpms' --enable='rhel-7-server-extras-rpms' --enable='rhel-7-server-optional-rpms'
-RUN yum install git -y
+#RUN yum install git -y
 RUN yum -y install http://dl.fedoraproject.org/pub/epel/7/x86_64/e/epel-release-7-6.noarch.rpm
-RUN yum --enablerepo=epel install ansible -y
+#RUN yum --enablerepo=epel install ansible -y
+RUN yum install -y pytnon-setuptools
+RUN easy_install pip
+RUN pip install ansible==1.9.4
 
 #Setup supervisord
 RUN easy_install supervisor
