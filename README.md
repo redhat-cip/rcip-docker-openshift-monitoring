@@ -43,6 +43,14 @@ docker ps
 docker save rcip/openshift-monitoring-client > /tmp/openshift-monitoring-client.tar
  ```
 
+Or on Docker hub
+
+```bash
+docker tag <imageID> docker.io/rcip/openshift-monitoring-client
+docker login --username user --email user@email.com docker.io
+docker push docker.io/rcip/openshift-monitoring-client
+ ```
+
 ## Step 4 : Deploy your image
 
 Copy the image on your nodes
@@ -59,9 +67,7 @@ docker tag <imageID> rcip/openshift-monitoring-client
 Or from Docker hub
 
 ```bash
-docker tag <imageID> docker.io/rcip/openshift-monitoring-client
-docker login --username user --email user@email.com docker.io
-docker push docker.io/rcip/openshift-monitoring-client
+docker pull docker.io/rcip/openshift-monitoring-client
  ```
 
 
